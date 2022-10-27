@@ -1,0 +1,76 @@
+﻿@model IEnumerable<prueba.Models.Products>
+@{
+    ViewBag.Title = "POS";
+}
+
+@section scripts{
+    <script src="~/Scripts/inicio.js"></script>
+}
+
+<div class="container">
+    <div>
+        <div><h2>Lista de Productos</h2></div>
+        <table class="table table-striped">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Vender</th>
+                <th>Modificar</th>
+            </tr>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <th>@i.Producto</th>
+                    <th>@i.Cantidad</th>
+                    <th>@i.ValorUnitario</th>
+                    <th><button onclick="agregar(@i.Id)">Vender</button></th>
+                    <th><button onclick="editar(@i.Id)">Modificar</button></th>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+
+
+    <div id="verCarrito">
+        <div class="form-grooup">
+            <h2>Datos cliente</h2>
+            <div>
+                <label>Nombre:</label>
+                <input class="form-control" name="Nombre" id="Nombre" placeholder="Nombre cliente" />
+            </div>
+            <div>
+                <label>Cedula:</label>
+                <input class="form-control" name="Cedula" id="Cedula" placeholder="Cedula cliente" type="number" />
+            </div>
+            <div>
+                <label>Apellido</label>
+                <input class="form-control" name="Apellido" id="Apellido" placeholder="Apellido cliente" />
+            </div>
+            <div>
+                <label>Telefono</label>
+                <input class="form-control" name="Telefono" id="Telefono" placeholder="Telefono" type="tel" />
+            </div>
+        </div>
+        <div>
+            <h2>Carrito</h2>
+            <div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Valor Unitario</th>
+                    </tr>
+                    <tbody id="carrito">
+                    </tbody>
+                    <tbody id="totalValor">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input id="pagar" onclick="pagarCarrito()" type="button" value="Pagar" />
+    </div>
+</div>
+<h3>Clients:<a href="/Home/Clients">Clients</a></h3>
